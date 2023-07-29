@@ -18,7 +18,7 @@ export async function DeleteBookmark(context: z.infer<typeof bookmarkSchema>) {
       console.log(error);
       return false;
     }
-    if (data.length > 0) {
+    if (data && data.length > 0) {
       return true;
     }
     return false;

@@ -1,35 +1,77 @@
-"use client";
+import Health from "@/components/icons/health";
+import Home from "@/components/icons/home";
+import LogoIcon from "@/components/icons/logo";
+import Marketing from "@/components/icons/marketing";
+import Science from "@/components/icons/science";
+import Technology from "@/components/icons/technology";
+import SiteFooter from "@/components/site/site-footer";
+import { menus } from "@/config/menu";
+import { notFoundConfig } from "@/config/not-found";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
+import { v4 } from "uuid";
 
-import { AlertTriangleIcon, ArrowLeftIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React from "react";
-
-const SiteNotFound = () => {
-  const router = useRouter();
+export default function SiteNotFound() {
   return (
-    <div className="max-w-3xl mx-auto bg-white rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
-      <AlertTriangleIcon className="mx-auto h-12 w-12 text-gray-400" />
-      <h3 className="mt-2 text-sm font-semibold text-gray-900">Алдаа</h3>
-      <p className="mt-1 text-sm text-gray-500">
-        Таны хайсан нийтлэл олдсонгүй!
-      </p>
-      <div className="mt-6">
-        <button
-          type="button"
-          onClick={() => {
-            router.back();
-          }}
-          className="inline-flex items-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-        >
-          <ArrowLeftIcon
-            className="-ml-0.5 mr-1.5 h-5 w-5"
-            aria-hidden="true"
-          />
-          Буцах
-        </button>
-      </div>
+    <div className="bg-white">
+      <main className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
+        <LogoIcon className="mx-auto h-14 w-14" />
+        <div className="mx-auto mt-10 max-w-2xl text-center">
+          <p className="text-xl font-semibold leading-8 text-gray-900">404</p>
+          <h1 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            {notFoundConfig.title}
+          </h1>
+          <p className="mt-4 text-base leading-7 text-gray-500 sm:mt-6 sm:text-lg sm:leading-8">
+            {notFoundConfig.description}
+          </p>
+        </div>
+        <div className="mx-auto mt-5 flow-root max-w-lg sm:mt-10">
+          <h2 className="sr-only">{notFoundConfig.menu}</h2>
+          <ul role="list" className="divide-y divide-gray-900/5">
+            {menus.map((menu) => (
+              <Link key={v4()} href={menu.slug || ""}>
+                <li className="relative flex gap-x-6 border-b border-black/5 py-6">
+                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg shadow-sm ring-1 ring-gray-900/10">
+                    {menu.slug === "/" && (
+                      <Home className="h-6 w-6 text-gray-600" />
+                    )}
+                    {menu.slug === "health" && (
+                      <Health className="h-6 w-6 text-gray-600" />
+                    )}
+                    {menu.slug === "science" && (
+                      <Science className="h-6 w-6 text-gray-600" />
+                    )}
+                    {menu.slug === "technology" && (
+                      <Technology className="h-6 w-6 text-gray-600" />
+                    )}
+                    {menu.slug === "marketing" && (
+                      <Marketing className="h-6 w-6 text-gray-600" />
+                    )}
+                  </div>
+                  <div className="my-auto flex-auto items-center text-sm font-semibold leading-6 text-gray-900">
+                    {menu.title}
+                  </div>
+                  <div className="flex-none self-center">
+                    <ChevronRightIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </li>
+              </Link>
+            ))}
+          </ul>
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/"
+              className="rounded-md bg-gray-100 px-10 py-2 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-200"
+            >
+              {notFoundConfig.back}
+            </Link>
+          </div>
+        </div>
+      </main>
+      <SiteFooter />
     </div>
   );
-};
-
-export default SiteNotFound;
+}

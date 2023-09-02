@@ -1,7 +1,7 @@
 import ProtectedTitle from '@/components/protected/protected-title';
 import Pagination from '@/components/shared/pagination';
 import { savedPostConfig } from '@/config/saved-post';
-import { dashBoardBookmarkTableEmpty as empty } from '@/config/dashboard';
+import { emptyConfig } from '@/config/empty';
 import { BookMarkWithPost } from '@/types/collection';
 import supabase from '@/utils/supabase-server';
 import { Metadata } from 'next';
@@ -57,7 +57,7 @@ const SavedPostPage: React.FC<SavedPostPageProps> = async ({ searchParams }) => 
             <div className="mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
                 {data?.length && data?.length > 0 ? (
                     <>
-                        <ProtectedTitle title={savedPostConfig.title} />
+                        <ProtectedTitle title={savedPostConfig.title} description={savedPostConfig.description} />
                         <TableWrapper>
                             <SavedPostsTableHeader titles={savedPostConfig.tableHeader} />
                             <SavedPostsTable savedPosts={data ? data : []} />
@@ -75,7 +75,7 @@ const SavedPostPage: React.FC<SavedPostPageProps> = async ({ searchParams }) => 
                         )}
                     </>
                 ) : (
-                    <TableEmpty emptyTitle={empty.title} emptyDescription={empty.description} />
+                    <TableEmpty emptyTitle={emptyConfig.empty} emptyDescription={emptyConfig.description} />
                 )}
             </div>
         </>

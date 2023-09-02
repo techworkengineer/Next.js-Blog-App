@@ -57,15 +57,15 @@ const SavedPostsDeleteButton: React.FC<SavedPostsDeleteButtonProps> = ({ id }) =
             const response = await DeleteSavedPost(savedPostData);
             if (response) {
                 setIsDeleteLoading(false);
-                toast.success(toolbarConfig.deleted);
+                toast.success(savedPostConfig.deleted);
                 router.refresh();
             } else {
                 setIsDeleteLoading(false);
-                toast.error(toolbarConfig.error);
+                toast.error(savedPostConfig.errorDelete);
             }
         } else {
             setIsDeleteLoading(false);
-            toast.error(toolbarConfig.error);
+            toast.error(savedPostConfig.errorDelete);
         }
     }
 
@@ -76,13 +76,13 @@ const SavedPostsDeleteButton: React.FC<SavedPostsDeleteButtonProps> = ({ id }) =
                 onClick={() => setShowDeleteAlert(true)}
                 className="rounded-md border bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100"
             >
-                {savedPostConfig.actionDelete}
+                {savedPostConfig.delete}
             </button>
             <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
                 <AlertDialogContent className="text-md font-sans">
                     <AlertDialogHeader>
-                        <AlertDialogTitle>{savedPostConfig.actionDeleteTitle}</AlertDialogTitle>
-                        <AlertDialogDescription>{savedPostConfig.actionDeleteDescription}</AlertDialogDescription>
+                        <AlertDialogTitle>{savedPostConfig.question}</AlertDialogTitle>
+                        <AlertDialogDescription>{savedPostConfig.warning}</AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>{savedPostConfig.cancel}</AlertDialogCancel>

@@ -1,4 +1,4 @@
-import PostCreateButton from "@/components/protected/post/post-create-button";
+import PostCreateButton from "@/components/protected/post/buttons/post-create-button";
 import React from "react";
 
 interface TableTitleProps {
